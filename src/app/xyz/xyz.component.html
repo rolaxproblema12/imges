@@ -1,0 +1,11 @@
+<h1 class="titulo">Ingresa las imagenes de los automoviles</h1>
+<div>
+  <input  class="input-img" (change)="capturarFile($event)" type="file">
+</div>
+<div>
+  <button class="button-img" type="button">Enviar img</button>
+</div>
+<div >
+  <img class="img-input" width="100px" [src]="previsualization" alt="">
+  <!-- <img class="img-input" width="100px" [src]="previsualization" alt=""> -->
+</div>

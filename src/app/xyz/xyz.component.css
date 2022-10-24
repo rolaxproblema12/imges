@@ -1,0 +1,45 @@
+h1 {
+    color: rgb(3, 3, 3);
+    text-align: center;
+}
+.input-img{
+    border: 5px dotted black;
+    border-radius: 5%;
+    padding: 5rem 2.5rem;
+    display:block;
+    margin: 0 auto;
+    align-items: center;
+    cursor: pointer;
+
+}
+.button-img{
+    padding: .5rem 1.5rem;
+    display: block;
+    margin: 2rem auto;
+    background: linear-gradient(
+        45deg,
+        rgba(15, 37, 110, 1) 12%,
+        rgba(19, 74, 83, 1) 31%,
+        rgba(32, 178, 7, 1) 84%
+      );
+      background-blend-mode: normal;
+    color: white;
+}
+.button-img:hover{
+    cursor: pointer;
+}
+.input-img:hover{
+    border: 5px solid rgb(73, 173, 103);
+}
+.img-input{
+    width: 250px;
+    height: 250px;
+}
+.imgs{
+    max-width: 70%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 5px;
+    
+}
