@@ -10,17 +10,25 @@ import { AsyncAction } from 'rxjs/internal/scheduler/AsyncAction';
 export class XyzComponent implements OnInit {
   public previsualization: string = '';
   public archivos: any = [];
+  public archi: string[] =[];
 
   constructor(private sanitizer:DomSanitizer) { }
 
   ngOnInit(): void {
   }
   capturarFile(event:any):any{
-    const img = event.target.files[0];
-    this.extraerBase64(img).then((imgen:any) => {
-      this.previsualization = imgen.base;
-    });
-    this.archivos.push(img);
+    console.log(event)
+    for (let document of event.target.files)
+    {
+      this.archi.push(document)
+      this.extraerBase64(this.archi.shift()).then((imgen:any) => {
+        this.previsualization = imgen.base;
+        this.archivos.push(this.previsualization);
+      });
+
+    } 
+
+
   }
   extraerBase64 = async ($event : any) => new Promise((resolve, reject) => 
   {
