@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AsyncAction } from 'rxjs/internal/scheduler/AsyncAction';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-xyz',
@@ -11,10 +12,15 @@ export class XyzComponent implements OnInit {
   public previsualization: string = '';
   public archivos: any = [];
   public archi: string[] =[];
-
-  constructor(private sanitizer:DomSanitizer) { }
-
+  imagenes = [];
+  
+  constructor(private sanitizer:DomSanitizer, private authService:AuthService) { }
   ngOnInit(): void {
+    const url = 'http://mi-img.test/api/imagenes';
+    this.authService.getImgs(url).subscribe( (Ima:any) =>{
+      this.imagenes = Ima;
+      console.log(this.imagenes);
+    });
   }
   capturarFile(event:any):any{
     console.log(event)
@@ -24,6 +30,7 @@ export class XyzComponent implements OnInit {
       this.extraerBase64(this.archi.shift()).then((imgen:any) => {
         this.previsualization = imgen.base;
         this.archivos.push(this.previsualization);
+        console.log(this.archivos);
       });
 
     } 
@@ -54,18 +61,18 @@ export class XyzComponent implements OnInit {
       
   })
 
-  // subirArchivo():any{
-  //   try{
-  //     const formularioDatos = new FormData();
-  //     this.archivos.forEach((archivo:any) => {
-  //       console.log(archivo); 
-  //       formularioDatos.append('files',archivo)
-  //     })
-  //     this.rest.post('https:',formularioDatos).subscribe((res:any) =>{
-  //       console.log('la respuesta del servidor es ',res);
-  //     }) 
-  //   }
-  //   catch(e)
-  //   {console.log(e)}
-  // }
+  subirArchivo():any{
+    try{
+      const formularioDatos = new FormData();
+      this.archivos.forEach((archivo:any) => {
+        console.log(archivo); 
+        formularioDatos.append('img',archivo)
+      })
+      this.authService.postImg('https:',formularioDatos).subscribe((res:any) =>{
+        console.log('la respuesta del servidor es ',res);
+      }) 
+    }
+    catch(e)
+    {console.log(e)}
+  }
 }

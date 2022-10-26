@@ -3,7 +3,7 @@
   <input  class="input-img" (change)="capturarFile($event)" type="file" multiple>
 </div>
 <div>
-  <button class="button-img" type="button">Enviar img</button>
+  <button (submit)="subirArchivo()" class="button-img" type="submit">Enviar img</button>
 </div>
 <div>
   <div *ngFor="let item of archivos; index as i; first as isFirst">
