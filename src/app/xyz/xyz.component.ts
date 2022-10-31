@@ -12,6 +12,7 @@ export class XyzComponent implements OnInit {
   public previsualization: string = '';
   public archivos: any = [];
   public archi: string[] =[];
+  public archi2: any = [];
   imagenes = [];
   
   constructor(private sanitizer:DomSanitizer, private authService:AuthService) { }
@@ -24,8 +25,11 @@ export class XyzComponent implements OnInit {
   }
   capturarFile(event:any):any{
     console.log(event)
+
     for (let document of event.target.files)
     {
+      this.archi2.push(document);
+      console.log(this.archi2)
       this.archi.push(document)
       this.extraerBase64(this.archi.shift()).then((imgen:any) => {
         this.previsualization = imgen.base;
@@ -64,12 +68,13 @@ export class XyzComponent implements OnInit {
   subirArchivo():any{
     try{
       const formularioDatos = new FormData();
-      this.archivos.forEach((archivo:any) => {
-        console.log(archivo); 
+      this.archi2.forEach((archivo:any) => {
+        console.log(archivo);
         formularioDatos.append('img',archivo)
+        
       })
-      this.authService.postImg('https:',formularioDatos).subscribe((res:any) =>{
-        console.log('la respuesta del servidor es ',res);
+      this.authService.postImg('http://mi-img.test/api/imagenes',{'img':'sdfsd'}).subscribe((res:any) =>{
+      console.log('la respuesta del servidor es ',res);
       }) 
     }
     catch(e)
