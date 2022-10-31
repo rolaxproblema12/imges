@@ -12,15 +12,21 @@ export class XyzComponent implements OnInit {
   public previsualization: string = '';
   public archivos: any = [];
   public archi: string[] =[];
-  public archi2: any = [];
-  imagenes = [];
+  public archi2: any= [];
+  public imagenes:any = [];
+  public images : any = [];
   
   constructor(private sanitizer:DomSanitizer, private authService:AuthService) { }
   ngOnInit(): void {
     const url = 'http://mi-img.test/api/imagenes';
     this.authService.getImgs(url).subscribe( (Ima:any) =>{
       this.imagenes = Ima;
-      console.log(this.imagenes);
+      for(let img of this.imagenes)
+      {
+        this.images.push(img.img);
+        console.log(img.img) 
+      }
+
     });
   }
   capturarFile(event:any):any{
@@ -71,11 +77,11 @@ export class XyzComponent implements OnInit {
       this.archi2.forEach((archivo:any) => {
         console.log(archivo);
         formularioDatos.append('img',archivo)
-        
+        this.authService.postImg('http://mi-img.test/api/imagenes',formularioDatos).subscribe((res:any) =>{
+          console.log('la respuesta del servidor es ',res);
+          }) 
       })
-      this.authService.postImg('http://mi-img.test/api/imagenes',{'img':'sdfsd'}).subscribe((res:any) =>{
-      console.log('la respuesta del servidor es ',res);
-      }) 
+
     }
     catch(e)
     {console.log(e)}

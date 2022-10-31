@@ -8,6 +8,11 @@
 <div>
   <div *ngFor="let item of archivos; index as i; first as isFirst">
     <img class="img-input" width="100px" [src]="item" alt="">
-    <!-- <img class="img-input" width="100px" [src]="previsualization" alt=""> -->
+  </div>
+   <div *ngFor="let image of images">
+    <img class="img-input" width="100px" src={{image}} alt="">
+  </div>
+  <div *ngFor="let image of images">
+    <img class="img-input" width="100px" src="https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg" alt="">
   </div>
 </div>
