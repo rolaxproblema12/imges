@@ -20,15 +20,19 @@ export class XyzComponent implements OnInit {
   ngOnInit(): void {
     const url = 'http://mi-img.test/api/imagenes';
     this.authService.getImgs(url).subscribe( (Ima:any) =>{
-      this.imagenes = Ima;
-      for(let img of this.imagenes)
+      if(this.imagenes)
       {
-        this.images.push(img.img);
-        console.log(img.img) 
+        this.imagenes.push(Ima)
+        console.log(this.imagenes)
       }
+      // for(let img of this.imagenes)
+      // {
+      //   this.images.push(img.img);
+      //   console.log(img.img) 
+      // }
 
     });
-  }
+  }                                                               
   capturarFile(event:any):any{
     console.log(event)
 
