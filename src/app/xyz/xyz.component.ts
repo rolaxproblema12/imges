@@ -20,16 +20,32 @@ export class XyzComponent implements OnInit {
   ngOnInit(): void {
     const url = 'http://mi-img.test/api/imagenes';
     this.authService.getImgs(url).subscribe( (Ima:any) =>{
-      if(this.imagenes)
+      this.imagenes.push(Ima)
+      console.log(this.imagenes)
+      console.log(this.imagenes.length)
+      for(let img of this.imagenes)
       {
-        this.imagenes.push(Ima)
-        console.log(this.imagenes)
+        for(let imgg of img)
+        {
+          let result = imgg.img.replace('public/','http://mi-img.test/storage/');
+          console.log(result)
+          this.images.push(result)
+        }
       }
-      // for(let img of this.imagenes)
+      // for(let i = 0; i<this.imagenes.length; i++)
       // {
-      //   this.images.push(img.img);
-      //   console.log(img.img) 
+      //   // let htpp = 'http://mi-img.test/storage/'+img.img;
+      //   // console.log(htpp+'hello');
+
+      //   if(i==3)
+      //   {
+      //     console.log("hellos qword")
+      //   }
+      //     console.log(this.imagenes[i]) 
+      //   // this.images.push();
+      //   console.log(i)
       // }
+      
 
     });
   }                                                               
